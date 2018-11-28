@@ -1,5 +1,5 @@
 let APIURL = '';
-​
+
 switch (window.location.hostname) {
     // this is the local host name of your react app
     case 'localhost' || '127.0.0.1':
@@ -11,5 +11,5 @@ switch (window.location.hostname) {
         // this is the full url of your deployed API
         APIURL = 'https://test-deployment-server.herokuapp.com'
 }
-​
+
 export default APIURL;

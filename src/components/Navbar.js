@@ -11,6 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Route, Link, Switch } from "react-router-dom";
 import { Grid, Tab } from "@material-ui/core";
 import DropDownMenu from "./DropDownMenu";
+import HelloWorld from "./IndexPage/HelloWorld";
 
 
 const styles = theme => ({

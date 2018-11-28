@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid } from "@material-ui/core";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import Theme from "./styles/theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 

@@ -8,15 +8,15 @@ export default class HelloWorld extends Component {
 
   componentDidMount() {
     fetch(`${ApiUrl}/hello_world/`)
-      .then(response => response.json())
+      .then(response => response.text())
       .then(text => this.setState({ text }));
   }
 
   render() {
       return (
-        <div>
-            {this.state.text}
-        </div>
+          <div>
+              {this.state.text}
+          </div>
       )
   }
 }

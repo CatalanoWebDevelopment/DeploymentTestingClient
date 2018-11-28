@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
+
+a {
+    text-decoration: none;
+}
+
+.white {
+    color: #ffffff !important;
+}
+
+.black {
+    color: #000000 !important;
+}
+
+.grey {
+    color:#808080 !important;
+}
+
+.image {
+    margin-top: 8px;
+    border-radius: 20px;
+}
+
+/* MEDIA QUERIES */

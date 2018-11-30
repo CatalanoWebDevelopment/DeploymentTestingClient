@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Route, Link, Switch } from "react-router-dom";
 import { Grid, Tab } from "@material-ui/core";
 import DropDownMenu from "./DropDownMenu";
-import HelloWorld from "./IndexPage/HelloWorld";
+import UserHome from "./UserPage/UserHome";
 
 
 const styles = theme => ({
@@ -93,7 +93,7 @@ function SearchAppBar(props) {
           </IconButton>
           <Typography className={classes.title} variant="h6" color="inherit">
             <Link to="/">
-              <Tab label="Hello World" className="white" />
+              <Tab label="Home" className="white" />
             </Link>
           </Typography>
 
@@ -116,7 +116,7 @@ function SearchAppBar(props) {
       <Grid item xs={12}>
         <Switch>
           <Route exact path="/">
-            <HelloWorld />
+            <UserHome />
           </Route>
         </Switch>
       </Grid>

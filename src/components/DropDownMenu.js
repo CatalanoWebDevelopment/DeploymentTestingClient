@@ -36,7 +36,7 @@ function RenderPropsMenu() {
             >
               <MenuItem onClick={handleClose}>
                 <Link to="/" className="black">
-                  Hello World
+                  Home
                 </Link>
               </MenuItem>
             </Menu>

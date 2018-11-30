@@ -12,6 +12,7 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import ApiUrl from "../../helpers/environment";
 
 const styles = theme => ({
   layout: {
@@ -71,10 +72,9 @@ class SignIn extends React.Component {
     let firstName = this.state.firstName;
     let lastName = this.state.lastName;
     let password = this.state.password;
-
     let userData = { user: { email, firstName, lastName, password } };
 
-    fetch("http://localhost:3000/user/register", {
+    fetch(`${ApiUrl}/user/create`, {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -177,8 +177,10 @@ class SignIn extends React.Component {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
+
+              {this.passwordVerification()}
             </form>
-            {this.passwordVerification()}
+            
             <br />
 
             <Button

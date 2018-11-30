@@ -67,17 +67,17 @@ class SignIn extends React.Component {
 
   onSubmitRegister = event => {
     event.preventDefault();
-    let email = this.state.email
-    let firstName = this.state.firstName
-    let lastName = this.state.lastName
-    let password = this.state.password
+    let email = this.state.email;
+    let firstName = this.state.firstName;
+    let lastName = this.state.lastName;
+    let password = this.state.password;
 
     let userData = { user: { email, firstName, lastName, password } };
 
     fetch("http://localhost:3000/user/register", {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(userData)
     })
@@ -86,6 +86,21 @@ class SignIn extends React.Component {
         let token = response.sessionToken;
         localStorage.setItem("SessionToken", token);
       });
+  };
+
+  passwordVerification = () => {
+    if (this.state.password === this.state.passwordVerify) {
+      return (
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+        >
+          Register User
+        </Button>
+      );
+    }
   };
 
   render() {
@@ -125,7 +140,7 @@ class SignIn extends React.Component {
                 />
               </FormControl>
 
-               <FormControl margin="normal" required fullWidth>
+              <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="lastName">Last Name</InputLabel>
                 <Input
                   id="lastName"
@@ -162,17 +177,8 @@ class SignIn extends React.Component {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Register User
-              </Button>
             </form>
-
+            {this.passwordVerification()}
             <br />
 
             <Button

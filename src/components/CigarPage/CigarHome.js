@@ -40,11 +40,11 @@ export default class CigarHome extends Component {
       cigar: { name, ringGauge, length, strength, wrapperColor }
     };
 
-    fetch(`${ApiUrl}/cigars/create`, {
+    fetch(`${ApiUrl}/cigar/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("SessionToken")
+        "Authorization": localStorage.getItem("SessionToken")
       },
       body: JSON.stringify(newCigar)
     })

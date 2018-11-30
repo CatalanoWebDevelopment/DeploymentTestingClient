@@ -21,4 +21,10 @@ a {
     border-radius: 20px;
 }
 
+.centered {
+    margin: 0 auto;
+    text-align: center;
+    align-content: center;
+}
+
 /* MEDIA QUERIES */

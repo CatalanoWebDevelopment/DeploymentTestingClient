@@ -32,9 +32,9 @@ export default class UserHome extends Component {
         return(
             <Grid container spacing={8}>
                 <Grid item xs={12}>
-                    {this.state.isLoginOpen === true && <Login renderRegister={this.renderRegister} />}
+                    {this.state.isLoginOpen === true && <Login renderRegister={this.renderRegister} renderLinks={this.props.renderLinks} />}
 
-                    {this.state.isRegisterOpen === true && <Register renderLogin={this.renderLogin} />}
+                    {this.state.isRegisterOpen === true && <Register renderLogin={this.renderLogin} renderLinks={this.props.renderLinks} />}
                 </Grid>
             </Grid>
         )

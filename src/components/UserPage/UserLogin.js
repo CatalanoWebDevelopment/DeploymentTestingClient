@@ -81,6 +81,8 @@ class SignIn extends React.Component {
         let token = response.sessionToken;
         localStorage.setItem("SessionToken", token);
       });
+
+      this.props.renderLinks();
   };
 
   render() {

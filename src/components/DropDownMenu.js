@@ -39,6 +39,12 @@ function RenderPropsMenu() {
                   Home
                 </Link>
               </MenuItem>
+              
+              <MenuItem>
+                <Link to="/cigars" className="black">
+                  Cigars
+                </Link>
+              </MenuItem>
             </Menu>
           </React.Fragment>
         );

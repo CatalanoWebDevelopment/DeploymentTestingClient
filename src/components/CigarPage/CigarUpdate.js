@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import { FormControl, InputLabel, Input, Button } from "@material-ui/core";
+import ApiUrl from "../../helpers/environment";
 
 export default class CigarUpdate extends Component {
   state = {
@@ -26,12 +27,36 @@ export default class CigarUpdate extends Component {
     });
   };
 
+  updateCigar = event => {
+    event.preventDefault;
+    let cigarForUpdate = {
+      name: this.state.name,
+      ringGauge: this.state.ringGauge,
+      length: this.state.length,
+      strength: this.state.strength,
+      wrapperColor: this.state.wrapperColor
+    };
+
+    fetch(`${ApiUrl}/cigar/${this.props.cigar.id}`, {
+      method: "PUT",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("SessionToken")
+      }),
+      body: JSON.stringify(cigarForUpdate)
+    })
+      .then(response => response.json())
+      .then(response => {
+        this.props.toggleModal();
+      });
+  };
+
   render() {
     const { open } = this.state;
     return (
       <div>
         <Modal open={open} onClose={this.onCloseModal} center>
-          <form>
+          <form onSubmit={this.updateCigar}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="name">Name of Cigar</InputLabel>
               <Input

@@ -1,41 +1,83 @@
 import React, { Component } from "react";
 import CigarUpdate from "./CigarUpdate";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  Typography,
+  Grid,
+  CssBaseline,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell
+} from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 export default class CigarShow extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            renderModal: false
-        }
+    this.state = {
+      renderModal: false
+    };
+  }
+
+  CustomTableCell = withStyles(theme => ({
+    head: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white
+    },
+    body: {
+      fontSize: 14
     }
+  }))(TableCell);
 
-    renderUpdateModal = event => {
-        event.preventDefault();
-        if (this.state.renderModal === false) {
-          this.setState({
-            renderModal: true
-          });
-    
-          if (this.state.renderModal === true) {
-            return <CigarUpdate cigar={this.state.createdCigar} />;
-          }
-        } else {
-          this.setState({
-            renderModal: false
-          });
-        }
-      };
+  render() {
+    return (
+      <Grid container spacing={32} justify="space-evenly">
+        <CssBaseline />
+        <Grid item={8}>
+          <Typography
+            component="h3"
+            variant="h4"
+            color="secondary"
+            className="marginTop centered"
+          >
+            Your New {this.props.cigar.name}
+          </Typography>
 
-    render() {
-        return (
-            <div>
-                {this.props.cigar.name}
-                <Button onClick={this.renderUpdateModal}>
-                    Edit
-                </Button>
-            </div>
-        )
-    }
+          <Table>
+            <TableHead>
+              <TableRow>
+                <this.CustomTableCell>Name</this.CustomTableCell>
+
+                <this.CustomTableCell>
+                  Ring Gauge (1/64th inch)
+                </this.CustomTableCell>
+
+                <this.CustomTableCell>Length (inches)</this.CustomTableCell>
+
+                <this.CustomTableCell>Strength</this.CustomTableCell>
+
+                <this.CustomTableCell>Wrapper</this.CustomTableCell>
+              </TableRow>
+            </TableHead>
+            <TableCell>{this.props.cigar.name}
+            </TableCell>
+
+            <TableCell numeric>{this.props.cigar.ringGauge}
+            </TableCell>
+
+            <TableCell numeric>{this.props.cigar.length}
+            </TableCell>
+
+            <TableCell>{this.props.cigar.strength}
+            </TableCell>
+
+            <TableCell>{this.props.cigar.wrapperColor}
+            </TableCell>
+          </Table>
+        </Grid>
+      </Grid>
+    );
+  }
 }

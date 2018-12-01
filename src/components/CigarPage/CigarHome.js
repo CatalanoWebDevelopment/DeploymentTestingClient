@@ -23,7 +23,7 @@ export default class CigarHome extends Component {
       length: "",
       strength: "",
       wrapperColor: "",
-      renderModal: false,
+      renderShow: false,
       createdCigar: {}
     };
   }
@@ -59,19 +59,16 @@ export default class CigarHome extends Component {
       .then(response => response.json())
       .then(response => {
         this.setState({
-          createdCigar: response
+          createdCigar: response,
+          renderShow: true
         });
-
-        let displayData = document.getElementById("displayData");
-        let p = document.createElement("p")
-        p.innerHTML = <CigarShow cigar={this.state.createdCigar} />
-        
-        while (displayData.firstChild) {
-          displayData.removeChild(displayData.firstChild);
-        }
-
-        return displayData.appendChild(p);
       });
+  };
+
+  renderShowPage = () => {
+    if (!this.state.renderShow === false) {
+      return <CigarShow cigar={this.state.createdCigar} />;
+    }
   };
 
   render() {
@@ -155,7 +152,7 @@ export default class CigarHome extends Component {
         </Grid>
 
         <Grid item xs={8} className="centered">
-          <div id="displayData" />
+          {this.renderShowPage()}
         </Grid>
       </Grid>
     );

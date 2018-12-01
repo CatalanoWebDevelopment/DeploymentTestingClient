@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ApiUrl from "../../helpers/environment";
+import jwt_decode from "jwt-decode";
 import {
   Grid,
   CssBaseline,
@@ -10,6 +11,8 @@ import {
   Typography
 } from "@material-ui/core";
 
+import CigarShow from "./CigarShow";
+
 export default class CigarHome extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +22,9 @@ export default class CigarHome extends Component {
       ringGauge: "",
       length: "",
       strength: "",
-      wrapperColor: ""
+      wrapperColor: "",
+      renderModal: false,
+      createdCigar: {}
     };
   }
 
@@ -31,39 +36,39 @@ export default class CigarHome extends Component {
 
   handleCigarCreation = event => {
     event.preventDefault();
+    let decoded = jwt_decode(localStorage.getItem("SessionToken"));
+
+    let userId = decoded.id;
     let name = this.state.name;
     let ringGauge = this.state.ringGauge;
     let length = this.state.length;
     let strength = this.state.strength;
     let wrapperColor = this.state.wrapperColor;
     let newCigar = {
-      cigar: { name, ringGauge, length, strength, wrapperColor }
+      cigar: { name, ringGauge, length, strength, wrapperColor, userId }
     };
 
     fetch(`${ApiUrl}/cigar/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("SessionToken")
+        Authorization: localStorage.getItem("SessionToken")
       },
       body: JSON.stringify(newCigar)
     })
       .then(response => response.json())
       .then(response => {
-        let displayData = document.getElementById("displayData");
-        let p = document.createElement("p");
+        this.setState({
+          createdCigar: response
+        });
 
+        let displayData = document.getElementById("displayData");
+        let p = document.createElement("p")
+        p.innerHTML = <CigarShow cigar={this.state.createdCigar} />
+        
         while (displayData.firstChild) {
           displayData.removeChild(displayData.firstChild);
         }
-
-        p.innerHTML = `<h1>Your Created Cigar Result:</h1><p>Name: ${
-          response.name
-        }</p><p>Ring Gauge: ${response.ringGauge}</p><p>Length: ${
-          response.length
-        }</p><p>Wrapper Color: ${response.wrapperColor}</p><p>Strength: ${
-          response.strength
-        }</p>`;
 
         return displayData.appendChild(p);
       });
@@ -74,7 +79,12 @@ export default class CigarHome extends Component {
       <Grid container spacing={32} justify="space-evenly">
         <CssBaseline />
         <Grid item xs={6}>
-          <Typography component="h3" variant="h4" color="secondary" className="marginTop centered">
+          <Typography
+            component="h3"
+            variant="h4"
+            color="secondary"
+            className="marginTop centered"
+          >
             Want to Add a Cigar to Your Collection?
           </Typography>
           <form onSubmit={this.handleCigarCreation}>
@@ -144,7 +154,7 @@ export default class CigarHome extends Component {
           </form>
         </Grid>
 
-        <Grid item xs={12} className="centered">
+        <Grid item xs={8} className="centered">
           <div id="displayData" />
         </Grid>
       </Grid>

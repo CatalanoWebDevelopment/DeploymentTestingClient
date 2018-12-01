@@ -47,7 +47,7 @@ export default class CigarShow extends Component {
 
   showUpdateModal = () => {
     if (this.state.renderModal) {
-      return <CigarUpdate cigar={this.state.createdCigar} />;
+      return <CigarUpdate cigar={this.props.cigar} />;
     }
   };
 

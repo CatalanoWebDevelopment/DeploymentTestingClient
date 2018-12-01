@@ -31,6 +31,26 @@ export default class CigarShow extends Component {
     }
   }))(TableCell);
 
+  toggleUpdateModal = event => {
+      event.preventDefault();
+    
+      if (this.state.renderModal) {
+          this.setState({
+              renderModal: false
+          })
+      } else {
+          this.setState({
+              renderModal: true
+          })
+      }
+  }
+
+  showUpdateModal = () => {
+      if (this.state.renderModal) {
+          return <CigarUpdate cigar={this.state.createdCigar} />
+      }
+  }
+
   render() {
     return (
       <Grid container spacing={32} justify="space-evenly">
@@ -61,21 +81,22 @@ export default class CigarShow extends Component {
                 <this.CustomTableCell>Wrapper</this.CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableCell>{this.props.cigar.name}
-            </TableCell>
+            <TableCell>{this.props.cigar.name}</TableCell>
 
-            <TableCell numeric>{this.props.cigar.ringGauge}
-            </TableCell>
+            <TableCell numeric>{this.props.cigar.ringGauge}</TableCell>
 
-            <TableCell numeric>{this.props.cigar.length}
-            </TableCell>
+            <TableCell numeric>{this.props.cigar.length}</TableCell>
 
-            <TableCell>{this.props.cigar.strength}
-            </TableCell>
+            <TableCell>{this.props.cigar.strength}</TableCell>
 
-            <TableCell>{this.props.cigar.wrapperColor}
-            </TableCell>
+            <TableCell>{this.props.cigar.wrapperColor}</TableCell>
           </Table>
+        </Grid>
+        
+        <Grid item xs={6}>
+            <Button variant="contained" color="primary" onClick={this.renderUpdateModal}>
+                Edit
+            </Button>
         </Grid>
       </Grid>
     );

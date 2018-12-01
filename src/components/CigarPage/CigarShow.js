@@ -32,24 +32,24 @@ export default class CigarShow extends Component {
   }))(TableCell);
 
   toggleUpdateModal = event => {
-      event.preventDefault();
-    
-      if (this.state.renderModal) {
-          this.setState({
-              renderModal: false
-          })
-      } else {
-          this.setState({
-              renderModal: true
-          })
-      }
-  }
+    event.preventDefault();
+
+    if (this.state.renderModal) {
+      this.setState({
+        renderModal: false
+      });
+    } else {
+      this.setState({
+        renderModal: true
+      });
+    }
+  };
 
   showUpdateModal = () => {
-      if (this.state.renderModal) {
-          return <CigarUpdate cigar={this.state.createdCigar} />
-      }
-  }
+    if (this.state.renderModal) {
+      return <CigarUpdate cigar={this.state.createdCigar} />;
+    }
+  };
 
   render() {
     return (
@@ -92,11 +92,25 @@ export default class CigarShow extends Component {
             <TableCell>{this.props.cigar.wrapperColor}</TableCell>
           </Table>
         </Grid>
-        
+
         <Grid item xs={6}>
-            <Button variant="contained" color="primary" onClick={this.renderUpdateModal}>
-                Edit
-            </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.toggleUpdateModal}
+          >
+            Edit
+          </Button>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Button variant="contained" color="primary">
+            Delete
+          </Button>
+        </Grid>
+
+        <Grid item xs={8}>
+            {this.showUpdateModal()}
         </Grid>
       </Grid>
     );

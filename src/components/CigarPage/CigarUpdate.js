@@ -4,14 +4,18 @@ import { FormControl, InputLabel, Input, Button } from "@material-ui/core";
 import ApiUrl from "../../helpers/environment";
 
 export default class CigarUpdate extends Component {
-  state = {
-    open: true,
-    name: "",
-    ringGauge: "",
-    length: "",
-    strength: "",
-    wrapperColor: ""
-  };
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      open: true,
+      name: this.props.cigar.name,
+      ringGauge: this.props.cigar.ringGauge,
+      length: this.props.cigar.length,
+      strength: this.props.cigar.strength,
+      wrapperColor: this.props.cigar.wrapperColor
+    };
+  }
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -62,7 +66,7 @@ export default class CigarUpdate extends Component {
               <Input
                 id="name"
                 name="name"
-                value={this.props.cigar.name}
+                value={this.state.name}
                 autoComplete="name"
                 autoFocus
                 onChange={this.handleOnChange}
@@ -75,7 +79,7 @@ export default class CigarUpdate extends Component {
               <Input
                 id="ringGauge"
                 name="ringGauge"
-                value={this.props.cigar.ringGauge}
+                value={this.state.ringGauge}
                 autoComplete="ringGauge"
                 autoFocus
                 onChange={this.handleOnChange}
@@ -88,7 +92,7 @@ export default class CigarUpdate extends Component {
               <Input
                 id="length"
                 name="length"
-                value={this.props.cigar.length}
+                value={this.state.length}
                 autoComplete="length"
                 autoFocus
                 onChange={this.handleOnChange}
@@ -101,7 +105,7 @@ export default class CigarUpdate extends Component {
               <Input
                 id="strength"
                 name="strength"
-                value={this.props.cigar.strength}
+                value={this.state.strength}
                 autoComplete="strength"
                 autoFocus
                 onChange={this.handleOnChange}
@@ -114,7 +118,7 @@ export default class CigarUpdate extends Component {
               <Input
                 id="wrapperColor"
                 name="wrapperColor"
-                value={this.props.cigar.wrapperColor}
+                value={this.state.wrapperColor}
                 autoComplete="wrapperColor"
                 autoFocus
                 onChange={this.handleOnChange}

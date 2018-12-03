@@ -5,7 +5,7 @@ import ApiUrl from "../../helpers/environment";
 
 export default class CigarUpdate extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       open: true,
@@ -33,12 +33,13 @@ export default class CigarUpdate extends Component {
 
   updateCigar = event => {
     event.preventDefault();
+    let name = this.state.name;
+    let ringGauge = this.state.ringGauge;
+    let length = this.state.length;
+    let strength = this.state.strength;
+    let wrapperColor = this.state.wrapperColor;
     let cigarForUpdate = {
-      name: this.state.name,
-      ringGauge: this.state.ringGauge,
-      length: this.state.length,
-      strength: this.state.strength,
-      wrapperColor: this.state.wrapperColor
+      cigar: { name, ringGauge, length, strength, wrapperColor }
     };
 
     fetch(`${ApiUrl}/cigar/${this.props.cigar.id}`, {

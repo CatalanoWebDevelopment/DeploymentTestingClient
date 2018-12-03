@@ -32,7 +32,7 @@ export default class CigarShow extends Component {
   }))(TableCell);
 
   toggleUpdateModal = event => {
-    event.preventDefault();
+    
 
     if (this.state.renderModal) {
       this.setState({

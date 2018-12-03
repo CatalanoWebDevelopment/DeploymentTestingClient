@@ -11,6 +11,7 @@ import {
   TableCell
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import ApiUrl from "../../helpers/environment";
 
 export default class CigarShow extends Component {
   constructor(props) {
@@ -52,6 +53,21 @@ export default class CigarShow extends Component {
         />
       );
     }
+  };
+
+  deleteCigar = event => {
+    event.preventDefault();
+    fetch(`${ApiUrl}/cigar/${this.props.cigar.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("SessionToken")
+      }
+    })
+      .then(response => response.json())
+      .then(response => {
+        window.alert("Your cigar has been deleted.");
+        window.location.reload();
+      });
   };
 
   render() {
@@ -109,7 +125,11 @@ export default class CigarShow extends Component {
         </Grid>
 
         <Grid item xs={6}>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.deleteCigar}
+          >
             Delete
           </Button>
         </Grid>

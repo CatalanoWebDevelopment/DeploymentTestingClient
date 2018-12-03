@@ -50,7 +50,9 @@ class Sidebar extends Component {
           </Typography>
 
           <Typography variant="h6" color="inherit" className="root">
-            <Tab label="Logout" className="white" onClick={this.logout} />
+            <Link to="/">
+              <Tab label="Logout" className="white" onClick={this.logout} />
+            </Link>
           </Typography>
         </React.Fragment>
       );

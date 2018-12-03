@@ -28,7 +28,7 @@ export default class CigarUpdate extends Component {
   };
 
   updateCigar = event => {
-    event.preventDefault;
+    event.preventDefault();
     let cigarForUpdate = {
       name: this.state.name,
       ringGauge: this.state.ringGauge,

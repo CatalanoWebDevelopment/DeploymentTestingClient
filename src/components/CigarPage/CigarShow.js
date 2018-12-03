@@ -32,8 +32,6 @@ export default class CigarShow extends Component {
   }))(TableCell);
 
   toggleUpdateModal = event => {
-    
-
     if (this.state.renderModal) {
       this.setState({
         renderModal: false
@@ -47,7 +45,12 @@ export default class CigarShow extends Component {
 
   showUpdateModal = () => {
     if (this.state.renderModal) {
-      return <CigarUpdate cigar={this.props.cigar} toggleModal={this.toggleUpdateModal} />;
+      return (
+        <CigarUpdate
+          cigar={this.props.cigar}
+          toggleModal={this.toggleUpdateModal}
+        />
+      );
     }
   };
 
@@ -64,6 +67,8 @@ export default class CigarShow extends Component {
           >
             Your New {this.props.cigar.name}
           </Typography>
+
+          <br />
 
           <Table>
             <TableHead>
@@ -110,7 +115,7 @@ export default class CigarShow extends Component {
         </Grid>
 
         <Grid item xs={8}>
-            {this.showUpdateModal()}
+          {this.showUpdateModal()}
         </Grid>
       </Grid>
     );

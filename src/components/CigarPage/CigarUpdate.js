@@ -53,6 +53,7 @@ export default class CigarUpdate extends Component {
       .then(response => response.json())
       .then(response => {
         this.props.toggleModal();
+        window.alert(`${this.state.name} has been updated!`);
       });
   };
 

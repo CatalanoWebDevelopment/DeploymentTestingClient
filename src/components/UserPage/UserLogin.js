@@ -82,7 +82,9 @@ class SignIn extends React.Component {
         localStorage.setItem("SessionToken", token);
       });
 
-      this.props.renderLinks();
+      if (!localStorage.getItem("SessionToken") === undefined) {
+        this.props.renderLinks();
+      }
   };
 
   render() {

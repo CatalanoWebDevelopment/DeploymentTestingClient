@@ -88,6 +88,7 @@ class SignIn extends React.Component {
       });
 
       this.props.renderLinks();
+      this.props.renderGreeting();
   };
 
   passwordVerification = () => {

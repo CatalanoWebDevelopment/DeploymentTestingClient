@@ -84,6 +84,7 @@ class SignIn extends React.Component {
 
     if (!localStorage.getItem("SessionToken") === undefined) {
       this.props.renderLinks();
+      this.props.renderGreeting();
     }
   };
 

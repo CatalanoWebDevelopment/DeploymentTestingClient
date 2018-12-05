@@ -18,7 +18,13 @@ export default class CigarShow extends Component {
     super(props);
 
     this.state = {
-      renderModal: false
+      renderModal: false,
+      name: this.props.cigar.name,
+      ringGauge: this.props.cigar.ringGauge,
+      length: this.props.cigar.length,
+      strength: this.props.cigar.strength,
+      wrapperColor: this.props.cigar.wrapperColor,
+      id: this.props.cigar.id
     };
   }
 
@@ -47,17 +53,14 @@ export default class CigarShow extends Component {
   showUpdateModal = () => {
     if (this.state.renderModal) {
       return (
-        <CigarUpdate
-          cigar={this.props.cigar}
-          toggleModal={this.toggleUpdateModal}
-        />
+        <CigarUpdate cigar={this.state} toggleModal={this.toggleUpdateModal} updatedCigarState={this.updateCigarState} />
       );
     }
   };
 
   deleteCigar = event => {
     event.preventDefault();
-    fetch(`${ApiUrl}/cigar/${this.props.cigar.id}`, {
+    fetch(`${ApiUrl}/cigar/${this.state.id}`, {
       method: "DELETE",
       headers: {
         Authorization: localStorage.getItem("SessionToken")
@@ -68,6 +71,16 @@ export default class CigarShow extends Component {
         window.alert("Your cigar has been deleted.");
         window.location.reload();
       });
+  };
+
+  updateCigarState = (name, ringGauge, length, strength, wrapperColor) => {
+    this.setState({
+      name: name,
+      ringGauge: ringGauge,
+      length: length,
+      strength: strength,
+      wrapperColor: wrapperColor
+    });
   };
 
   render() {
@@ -81,7 +94,7 @@ export default class CigarShow extends Component {
             color="secondary"
             className="marginTop centered"
           >
-            Your New {this.props.cigar.name}
+            Your New {this.state.name}
           </Typography>
 
           <br />
@@ -102,15 +115,15 @@ export default class CigarShow extends Component {
                 <this.CustomTableCell>Wrapper</this.CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableCell>{this.props.cigar.name}</TableCell>
+            <TableCell>{this.state.name}</TableCell>
 
-            <TableCell numeric>{this.props.cigar.ringGauge}</TableCell>
+            <TableCell numeric>{this.state.ringGauge}</TableCell>
 
-            <TableCell numeric>{this.props.cigar.length}</TableCell>
+            <TableCell numeric>{this.state.length}</TableCell>
 
-            <TableCell>{this.props.cigar.strength}</TableCell>
+            <TableCell>{this.state.strength}</TableCell>
 
-            <TableCell>{this.props.cigar.wrapperColor}</TableCell>
+            <TableCell>{this.state.wrapperColor}</TableCell>
           </Table>
         </Grid>
 

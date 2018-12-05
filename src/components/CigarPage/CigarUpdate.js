@@ -54,6 +54,7 @@ export default class CigarUpdate extends Component {
       .then(response => {
         this.props.toggleModal();
         window.alert(`${this.state.name} has been updated!`);
+        this.props.updatedCigarState(this.state.name, this.state.ringGauge, this.state.length, this.state.strength, this.state.wrapperColor)
       });
   };
 

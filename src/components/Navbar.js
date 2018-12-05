@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UserHome from "./UserPage/UserHome";
 import CigarHome from "./CigarPage/CigarHome";
+import UserUpdate from "./UserPage/UserUpdate";
 import { Tab, AppBar, Toolbar, Typography } from "@material-ui/core";
 import "./Styles.css";
 
@@ -43,6 +44,12 @@ class Sidebar extends Component {
       return (
         <React.Fragment>
           <Typography variant="h6" color="inherit" className="root">
+            <Link to="/user_edit">
+              <Tab label="Update Profile" className="white" />
+            </Link>
+          </Typography>
+
+          <Typography variant="h6" color="inherit" className="root">
             <Link to="/add_cigars">
               <Tab label="Add a Cigar" className="white" />
             </Link>
@@ -62,20 +69,16 @@ class Sidebar extends Component {
     return (
       <div className="root">
         <AppBar position="static" className="centered">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" className="root">
-              <Link to="/">
-                <Tab label="Home" className="white" />
-              </Link>
-            </Typography>
-
-            {this.renderLinks()}
-          </Toolbar>
+          <Toolbar>{this.renderLinks()}</Toolbar>
         </AppBar>
 
         <Switch>
           <Route exact path="/">
             <UserHome renderLinks={this.renderNavigationOnLogin} />
+          </Route>
+          
+          <Route exact path="/user_edit">
+            <UserUpdate />
           </Route>
 
           <Route exact path="/add_cigars">

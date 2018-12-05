@@ -15,7 +15,7 @@ export default class UserUpdate extends Component {
 
   state = {
     id: this.decoded.id,
-    password: "",
+    firstName: "",
     lastName: "",
     email: "",
     password: "",
@@ -101,7 +101,7 @@ export default class UserUpdate extends Component {
           <br />
 
           <form onSubmit={this.updateUser}>
-            <FormControl margin="normal" fullWidth>
+          <FormControl margin="normal" fullWidth>
               <InputLabel htmlFor="firstName">First Name</InputLabel>
               <Input
                 id="firstName"

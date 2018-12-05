@@ -17,14 +17,30 @@ export default class UserGreeting extends Component {
       method: "GET"
     })
       .then(response => response.json())
-      .then(user => this.setState({
+      .then(user =>
+        this.setState({
           firstName: user.firstName,
           lastName: user.lastName
-      }));
+        })
+      );
+  };
+
+  returnLastUpdate = () => {
+    fetch(`${ApiUrl}/cigar/all`, {
+      method: "GET",
+      headers: new Headers({
+        Authorization: localStorage.getItem("SessionToken")
+      })
+    })
+      .then(response => response.json())
+      .then(cigars => {
+        console.log(cigars[cigars.length]);
+      });
   };
 
   componentDidMount() {
     this.fetchUser();
+    this.returnLastUpdate();
   }
 
   render() {
@@ -38,6 +54,28 @@ export default class UserGreeting extends Component {
             className="marginTop centered"
           >
             Welcome back {this.state.firstName} {this.state.lastName}!
+          </Typography>
+
+          <Typography
+            component="h5"
+            variant="h4"
+            color="secondary"
+            className="marginTop centered"
+          >
+            We are pleased to see you. Don't forget to keep your cigars updated.
+          </Typography>
+
+          <br />
+          <br />
+          <br />
+
+          <Typography
+            component="h5"
+            variant="h4"
+            color="secondary"
+            className="marginTop centered"
+          >
+            Your last update was:
           </Typography>
         </Grid>
       </Grid>

@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 import CigarShow from "./CigarShow";
+import Header from "../Header";
 
 export default class CigarHome extends Component {
   constructor(props) {
@@ -74,6 +75,7 @@ export default class CigarHome extends Component {
   render() {
     return (
       <Grid container spacing={32} justify="space-evenly">
+        <Header />
         <CssBaseline />
         <Grid item xs={6}>
           <Typography

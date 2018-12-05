@@ -9,6 +9,7 @@ import {
   Button,
   Typography
 } from "@material-ui/core";
+import Header from "../Header";
 
 export default class UserUpdate extends Component {
   decoded = jwt_decode(localStorage.getItem("SessionToken"));
@@ -92,6 +93,7 @@ export default class UserUpdate extends Component {
   render() {
     return (
       <Grid container spacing={32} justify="space-evenly">
+      <Header />
         <Grid item xs={8}>
           <Typography
             component="h3"

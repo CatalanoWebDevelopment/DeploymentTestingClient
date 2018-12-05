@@ -40,4 +40,8 @@ a {
     margin-top: 0.5em !important;
 }
 
+.relative {
+    position: relative;
+}
+
 /* MEDIA QUERIES */

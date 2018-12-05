@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Login from "./UserLogin";
 import Register from "./UserRegister";
 import Greeting from "./UserGreeting";
+import Header from "../Header";
 
 export default class UserHome extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ export default class UserHome extends Component {
   render() {
     return (
       <Grid container spacing={8}>
+      <Header />
         <Grid item xs={12}>
           {this.state.isLoginOpen === true && (
             <Login

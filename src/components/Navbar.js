@@ -23,14 +23,20 @@ class Sidebar extends Component {
   };
 
   renderNavigationOnLogin = () => {
-    if (!localStorage.getItem("SessionToken")) {
+    if (
+      localStorage.getItem("SessionToken") === undefined ||
+      !localStorage.getItem("SessionToken")
+    ) {
       return;
-    } else {
-      this.setState({
-        showNavigation: true
-      });
     }
+    this.setState({
+      showNavigation: true
+    });
   };
+
+  componentDidMount() {
+    this.renderNavigationOnLogin();
+  }
 
   renderLinks() {
     if (this.state.showNavigation) {

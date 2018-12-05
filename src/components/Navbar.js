@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import UserHome from "./UserPage/UserHome";
 import CigarHome from "./CigarPage/CigarHome";
-import styled from "styled-components";
 import { Tab, AppBar, Toolbar, Typography } from "@material-ui/core";
 import "./Styles.css";
 
 import { Route, Link, Switch } from "react-router-dom";
-
-const ListItem = styled.li`
-  list-style: none;
-  padding: 3px;
-  display: inline-block;
-`;
 
 class Sidebar extends Component {
   constructor() {
@@ -32,11 +25,11 @@ class Sidebar extends Component {
   renderNavigationOnLogin = () => {
     if (!localStorage.getItem("SessionToken")) {
       return;
+    } else {
+      this.setState({
+        showNavigation: true
+      });
     }
-
-    this.setState({
-      showNavigation: true
-    });
   };
 
   renderLinks() {
@@ -44,8 +37,8 @@ class Sidebar extends Component {
       return (
         <React.Fragment>
           <Typography variant="h6" color="inherit" className="root">
-            <Link to="/cigars">
-              <Tab label="Cigars" className="white" />
+            <Link to="/add_cigars">
+              <Tab label="Add a Cigar" className="white" />
             </Link>
           </Typography>
 
@@ -57,10 +50,6 @@ class Sidebar extends Component {
         </React.Fragment>
       );
     }
-  }
-
-  componentDidMount() {
-    this.renderNavigationOnLogin();
   }
 
   render() {
@@ -83,7 +72,7 @@ class Sidebar extends Component {
             <UserHome renderLinks={this.renderNavigationOnLogin} />
           </Route>
 
-          <Route exact path="/cigars">
+          <Route exact path="/add_cigars">
             <CigarHome />
           </Route>
         </Switch>

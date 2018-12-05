@@ -4,6 +4,8 @@ import ApiUrl from "../../helpers/environment";
 import { Grid, Typography } from "@material-ui/core";
 
 export default class UserGreeting extends Component {
+  decoded = jwt_decode(localStorage.getItem("SessionToken"));
+
   state = {
     id: this.decoded.id,
     firstName: "",
@@ -15,12 +17,13 @@ export default class UserGreeting extends Component {
       method: "GET"
     })
       .then(response => response.json())
-      .then(user => console.log(user));
+      .then(user => this.setState({
+          firstName: user.firstName,
+          lastName: user.lastName
+      }));
   };
 
   componentDidMount() {
-    decoded = jwt_decode(localStorage.getItem("SessionToken"));
-    
     this.fetchUser();
   }
 
@@ -34,7 +37,7 @@ export default class UserGreeting extends Component {
             color="secondary"
             className="marginTop centered"
           >
-            Welcome back!
+            Welcome back {this.state.firstName} {this.state.lastName}!
           </Typography>
         </Grid>
       </Grid>

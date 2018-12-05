@@ -68,11 +68,15 @@ export default class UserUpdate extends Component {
           lastName: user.lastName,
           email: user.email
         });
+        window.location.reload();
       });
   };
 
   passwordVerification = () => {
-    if (this.state.password === this.state.passwordVerify && this.state.password !== "") {
+    if (
+      this.state.password === this.state.passwordVerify &&
+      this.state.password !== ""
+    ) {
       return (
         <Button type="submit" fullWidth variant="contained" color="primary">
           Update Password
@@ -101,7 +105,7 @@ export default class UserUpdate extends Component {
           <br />
 
           <form onSubmit={this.updateUser}>
-          <FormControl margin="normal" fullWidth>
+            <FormControl margin="normal" fullWidth>
               <InputLabel htmlFor="firstName">First Name</InputLabel>
               <Input
                 id="firstName"

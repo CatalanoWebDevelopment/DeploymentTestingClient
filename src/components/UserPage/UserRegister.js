@@ -85,21 +85,15 @@ class SignIn extends React.Component {
       .then(response => {
         let token = response.sessionToken;
         localStorage.setItem("SessionToken", token);
+        this.props.renderLinks();
+        this.props.renderGreeting();
       });
-
-      this.props.renderLinks();
-      this.props.renderGreeting();
   };
 
   passwordVerification = () => {
     if (this.state.password === this.state.passwordVerify) {
       return (
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-        >
+        <Button type="submit" fullWidth variant="contained" color="primary">
           Register User
         </Button>
       );
@@ -183,7 +177,7 @@ class SignIn extends React.Component {
 
               {this.passwordVerification()}
             </form>
-            
+
             <br />
 
             <Button

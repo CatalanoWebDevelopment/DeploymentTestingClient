@@ -27,36 +27,37 @@ export default class UserGreeting extends Component {
   };
 
   returnLastUpdate = () => {
-    fetch(`${ApiUrl}/cigar/all`, {
-      method: "GET",
-      headers: new Headers({
-        Authorization: localStorage.getItem("SessionToken")
+    if (localStorage.getItem("SessionToken")) {
+      fetch(`${ApiUrl}/cigar/all`, {
+        method: "GET",
+        headers: new Headers({
+          Authorization: localStorage.getItem("SessionToken")
+        })
       })
-    })
-      .then(response => response.json())
-      .then(cigars => {
-        let updatedAt = cigars[cigars.length - 1].updatedAt;
+        .then(response => response.json())
+        .then(cigars => {
+          let updatedAt = cigars[cigars.length - 1].updatedAt;
 
-        this.setState({
-          updatedAt
+          this.setState({
+            updatedAt
+          });
         });
-      });
 
-    return (
-      <Typography
-        component="h5"
-        variant="h5"
-        color="secondary"
-        className="marginTop centered"
-      >
-        {this.state.updatedAt}
-      </Typography>
-    );
+      return (
+        <Typography
+          component="h5"
+          variant="h5"
+          color="secondary"
+          className="marginTop centered"
+        >
+          {this.state.updatedAt}
+        </Typography>
+      );
+    }
   };
 
   componentDidMount() {
     this.fetchUser();
-    this.returnLastUpdate();
   }
 
   render() {

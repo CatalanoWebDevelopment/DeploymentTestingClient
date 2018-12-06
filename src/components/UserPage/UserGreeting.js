@@ -9,7 +9,8 @@ export default class UserGreeting extends Component {
   state = {
     id: this.decoded.id,
     firstName: "",
-    lastName: ""
+    lastName: "",
+    updatedAt: ""
   };
 
   fetchUser = () => {
@@ -34,8 +35,23 @@ export default class UserGreeting extends Component {
     })
       .then(response => response.json())
       .then(cigars => {
-        console.log(cigars[cigars.length]);
+        let updatedAt = cigars[cigars.length - 1].updatedAt;
+
+        this.setState({
+          updatedAt
+        });
       });
+
+    return (
+      <Typography
+        component="h5"
+        variant="h5"
+        color="secondary"
+        className="marginTop centered"
+      >
+        {this.state.updatedAt}
+      </Typography>
+    );
   };
 
   componentDidMount() {
@@ -77,6 +93,8 @@ export default class UserGreeting extends Component {
           >
             Your last update was:
           </Typography>
+
+          {this.returnLastUpdate()}
         </Grid>
       </Grid>
     );

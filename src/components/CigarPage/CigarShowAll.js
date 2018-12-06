@@ -7,7 +7,8 @@ import {
   Table,
   TableHead,
   TableRow,
-  TableCell
+  TableCell,
+  TableBody
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ApiUrl from "../../helpers/environment";
@@ -40,21 +41,21 @@ export default class CigarShowAll extends Component {
       }
     })
       .then(response => response.json())
-      .then(response => {
+      .then(cigars => {
         this.setState({
-          cigars: response
+          cigars
         });
+        
       });
-      console.log(this.state.cigars)
   };
 
   printAllCigars = () => {
     let cigars = this.state.cigars;
-    console.log(cigars)
-    cigars.map((cigar, index) => {
+    return cigars.map((cigar, index) => {
+        console.log(cigar)
       return (
-        <React.Fragment key={index}>
-          <TableCell>{this.state.name}</TableCell>
+        <TableBody key={index}>
+          <TableCell>{cigar.name}</TableCell>
 
           <TableCell numeric>{cigar.ringGauge}</TableCell>
 
@@ -63,12 +64,12 @@ export default class CigarShowAll extends Component {
           <TableCell>{cigar.strength}</TableCell>
 
           <TableCell>{cigar.wrapperColor}</TableCell>
-        </React.Fragment>
+        </TableBody>
       );
     });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.getAllCigars();
   }
 
@@ -106,7 +107,7 @@ export default class CigarShowAll extends Component {
                 <this.CustomTableCell>Wrapper</this.CustomTableCell>
               </TableRow>
             </TableHead>
-            {/* {this.printAllCigars()} */}
+            {this.printAllCigars()}
           </Table>
         </Grid>
       </Grid>

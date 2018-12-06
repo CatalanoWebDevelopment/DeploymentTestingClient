@@ -56,6 +56,10 @@ export default class UserHome extends Component {
     this.resetUserHome();
   }
 
+  componentWillUnmount() {
+    this.resetUserHome();
+  }
+
   render() {
     return (
       <Grid container spacing={8}>

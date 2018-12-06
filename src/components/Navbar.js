@@ -6,6 +6,7 @@ import { Tab, AppBar, Toolbar, Typography } from "@material-ui/core";
 import "./Styles.css";
 
 import { Route, Link, Switch } from "react-router-dom";
+import CigarShowAll from "./CigarPage/CigarShowAll";
 
 class Sidebar extends Component {
   constructor() {
@@ -57,6 +58,12 @@ class Sidebar extends Component {
           </Typography>
 
           <Typography variant="h6" color="inherit" className="root">
+            <Link to="/my_cigars">
+              <Tab label="My Cigars" className="white" />
+            </Link>
+          </Typography>
+
+          <Typography variant="h6" color="inherit" className="root">
             <Link to="/">
               <Tab label="Logout" className="white" onClick={this.logout} />
             </Link>
@@ -84,6 +91,10 @@ class Sidebar extends Component {
 
           <Route exact path="/add_cigars">
             <CigarHome />
+          </Route>
+
+          <Route exact path="/my_cigars">
+            <CigarShowAll />
           </Route>
         </Switch>
       </div>

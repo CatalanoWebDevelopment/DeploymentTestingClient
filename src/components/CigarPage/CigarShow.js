@@ -63,7 +63,7 @@ export default class CigarShow extends Component {
     fetch(`${ApiUrl}/cigar/${this.state.id}`, {
       method: "DELETE",
       headers: {
-        Authorization: localStorage.getItem("SessionToken")
+        "Authorization": localStorage.getItem("SessionToken")
       }
     })
       .then(response => response.json())

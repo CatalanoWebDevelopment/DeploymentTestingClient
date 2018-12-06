@@ -41,10 +41,25 @@ export default class UserHome extends Component {
     });
   };
 
+  resetUserHome = () => {
+    if (!localStorage.getItem("SessionToken")) {
+      this.setState({
+        isLoginOpen: true,
+        isRegisterOpen: false,
+        isGreetingOpen: false
+      });
+    }
+    
+  };
+
+  componentDidMount() {
+    this.resetUserHome();
+  }
+
   render() {
     return (
       <Grid container spacing={8}>
-      <Header />
+        <Header />
         <Grid item xs={12}>
           {this.state.isLoginOpen === true && (
             <Login

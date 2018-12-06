@@ -21,6 +21,7 @@ class Sidebar extends Component {
     this.setState({
       showNavigation: false
     });
+    window.location.reload();
   };
 
   renderNavigationOnLogin = () => {
@@ -76,7 +77,7 @@ class Sidebar extends Component {
           <Route exact path="/">
             <UserHome renderLinks={this.renderNavigationOnLogin} />
           </Route>
-          
+
           <Route exact path="/user_edit">
             <UserUpdate />
           </Route>

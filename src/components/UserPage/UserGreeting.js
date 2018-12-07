@@ -27,8 +27,9 @@ export default class UserGreeting extends Component {
   };
 
   returnLastUpdate = () => {
+      let decoded = jwt_decode(localStorage.getItem("SessionToken"))
     if (localStorage.getItem("SessionToken")) {
-      fetch(`${ApiUrl}/cigar/all`, {
+      fetch(`${ApiUrl}/cigar/all/${decoded.id}`, {
         method: "GET",
         headers: new Headers({
           Authorization: localStorage.getItem("SessionToken")

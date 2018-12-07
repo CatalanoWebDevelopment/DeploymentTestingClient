@@ -8,7 +8,8 @@ import {
   Table,
   TableHead,
   TableRow,
-  TableCell
+  TableCell,
+  TableBody
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ApiUrl from "../../helpers/environment";
@@ -53,7 +54,11 @@ export default class CigarShow extends Component {
   showUpdateModal = () => {
     if (this.state.renderModal) {
       return (
-        <CigarUpdate cigar={this.state} toggleModal={this.toggleUpdateModal} updatedCigarState={this.updateCigarState} />
+        <CigarUpdate
+          cigar={this.state}
+          toggleModal={this.toggleUpdateModal}
+          updatedCigarState={this.updateCigarState}
+        />
       );
     }
   };
@@ -63,7 +68,7 @@ export default class CigarShow extends Component {
     fetch(`${ApiUrl}/cigar/${this.state.id}`, {
       method: "DELETE",
       headers: {
-        "Authorization": localStorage.getItem("SessionToken")
+        Authorization: localStorage.getItem("SessionToken")
       }
     })
       .then(response => response.json())
@@ -90,11 +95,11 @@ export default class CigarShow extends Component {
         <Grid item={8}>
           <Typography
             component="h3"
-            variant="h4"
+            variant="h5"
             color="secondary"
             className="marginTop centered"
           >
-            Your New {this.state.name}
+            {this.state.name}
           </Typography>
 
           <br />
@@ -115,37 +120,43 @@ export default class CigarShow extends Component {
                 <this.CustomTableCell>Wrapper</this.CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableCell>{this.state.name}</TableCell>
+            <TableBody>
+              <TableCell>{this.state.name}</TableCell>
 
-            <TableCell numeric>{this.state.ringGauge}</TableCell>
+              <TableCell numeric>{this.state.ringGauge}</TableCell>
 
-            <TableCell numeric>{this.state.length}</TableCell>
+              <TableCell numeric>{this.state.length}</TableCell>
 
-            <TableCell>{this.state.strength}</TableCell>
+              <TableCell>{this.state.strength}</TableCell>
 
-            <TableCell>{this.state.wrapperColor}</TableCell>
+              <TableCell>{this.state.wrapperColor}</TableCell>
+
+              <TableCell>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.toggleUpdateModal}
+                >
+                  Edit
+                </Button>
+              </TableCell>
+
+              <TableCell>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.deleteCigar}
+                >
+                  Delete
+                </Button>
+              </TableCell>
+            </TableBody>
           </Table>
         </Grid>
 
-        <Grid item xs={6}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.toggleUpdateModal}
-          >
-            Edit
-          </Button>
-        </Grid>
+        <Grid item xs={6} />
 
-        <Grid item xs={6}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.deleteCigar}
-          >
-            Delete
-          </Button>
-        </Grid>
+        <Grid item xs={6} />
 
         <Grid item xs={8}>
           {this.showUpdateModal()}

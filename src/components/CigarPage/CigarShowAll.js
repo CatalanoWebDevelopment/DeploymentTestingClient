@@ -13,13 +13,17 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import ApiUrl from "../../helpers/environment";
 import Header from "../Header";
+import jwt_decode from "jwt-decode";
+import CigarUpdate from "./CigarUpdate";
+import CigarShow from "./CigarShow";
 
 export default class CigarShowAll extends Component {
   constructor() {
     super();
 
     this.state = {
-      cigars: []
+      cigars: [],
+      openModal: false
     };
   }
 
@@ -34,10 +38,12 @@ export default class CigarShowAll extends Component {
   }))(TableCell);
 
   getAllCigars = () => {
-    fetch(`${ApiUrl}/cigar/all`, {
+    let decoded = jwt_decode(localStorage.getItem("SessionToken"));
+
+    fetch(`${ApiUrl}/cigar/all/${decoded.id}`, {
       method: "GET",
       headers: {
-        "Authorization": localStorage.getItem("SessionToken")
+        Authorization: localStorage.getItem("SessionToken")
       }
     })
       .then(response => response.json())
@@ -45,17 +51,16 @@ export default class CigarShowAll extends Component {
         this.setState({
           cigars
         });
-        
       });
   };
 
   printAllCigars = () => {
     let cigars = this.state.cigars;
     return cigars.map((cigar, index) => {
-        console.log(cigar)
+      console.log("CIGARS TO MAP", cigar);
       return (
         <TableBody key={index}>
-          <TableCell>{cigar.name}</TableCell>
+          {/* <TableCell>{cigar.name}</TableCell>
 
           <TableCell numeric>{cigar.ringGauge}</TableCell>
 
@@ -63,11 +68,26 @@ export default class CigarShowAll extends Component {
 
           <TableCell>{cigar.strength}</TableCell>
 
-          <TableCell>{cigar.wrapperColor}</TableCell>
+          <TableCell>{cigar.wrapperColor}</TableCell> */}
+
+          <CigarShow cigar={cigar} />
         </TableBody>
       );
     });
   };
+
+  toggleModal = event => {
+      event.preventDefault();
+      if (this.state.openModal === false) {
+          this.setState({
+              openModal: true
+          })
+      } else {
+          this.setState({
+              openModal: false
+          })
+      }
+  }
 
   componentDidMount() {
     this.getAllCigars();
@@ -79,7 +99,7 @@ export default class CigarShowAll extends Component {
         <Header />
         <CssBaseline />
 
-        <Grid item xs={10} className="centered">
+        {/* <Grid item xs={10} className="centered">
           <Typography
             component="h3"
             variant="h4"
@@ -106,10 +126,10 @@ export default class CigarShowAll extends Component {
 
                 <this.CustomTableCell>Wrapper</this.CustomTableCell>
               </TableRow>
-            </TableHead>
+            </TableHead> */}
             {this.printAllCigars()}
-          </Table>
-        </Grid>
+          {/* </Table> */}
+        {/* </Grid> */}
       </Grid>
     );
   }

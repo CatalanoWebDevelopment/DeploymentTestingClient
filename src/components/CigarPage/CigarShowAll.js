@@ -1,20 +1,9 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Typography,
-  Grid,
-  CssBaseline,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody
-} from "@material-ui/core";
+import { Grid, CssBaseline, TableCell, TableBody } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ApiUrl from "../../helpers/environment";
 import Header from "../Header";
 import jwt_decode from "jwt-decode";
-import CigarUpdate from "./CigarUpdate";
 import CigarShow from "./CigarShow";
 
 export default class CigarShowAll extends Component {
@@ -57,19 +46,8 @@ export default class CigarShowAll extends Component {
   printAllCigars = () => {
     let cigars = this.state.cigars;
     return cigars.map((cigar, index) => {
-      console.log("CIGARS TO MAP", cigar);
       return (
         <TableBody key={index}>
-          {/* <TableCell>{cigar.name}</TableCell>
-
-          <TableCell numeric>{cigar.ringGauge}</TableCell>
-
-          <TableCell numeric>{cigar.length}</TableCell>
-
-          <TableCell>{cigar.strength}</TableCell>
-
-          <TableCell>{cigar.wrapperColor}</TableCell> */}
-
           <CigarShow cigar={cigar} />
         </TableBody>
       );
@@ -77,17 +55,17 @@ export default class CigarShowAll extends Component {
   };
 
   toggleModal = event => {
-      event.preventDefault();
-      if (this.state.openModal === false) {
-          this.setState({
-              openModal: true
-          })
-      } else {
-          this.setState({
-              openModal: false
-          })
-      }
-  }
+    event.preventDefault();
+    if (this.state.openModal === false) {
+      this.setState({
+        openModal: true
+      });
+    } else {
+      this.setState({
+        openModal: false
+      });
+    }
+  };
 
   componentDidMount() {
     this.getAllCigars();
@@ -98,38 +76,7 @@ export default class CigarShowAll extends Component {
       <Grid container spacing={32} justify="space-evenly">
         <Header />
         <CssBaseline />
-
-        {/* <Grid item xs={10} className="centered">
-          <Typography
-            component="h3"
-            variant="h4"
-            color="secondary"
-            className="marginTop centered"
-          >
-            Your Cigars
-          </Typography>
-
-          <br />
-
-          <Table>
-            <TableHead>
-              <TableRow>
-                <this.CustomTableCell>Name</this.CustomTableCell>
-
-                <this.CustomTableCell>
-                  Ring Gauge (1/64th inch)
-                </this.CustomTableCell>
-
-                <this.CustomTableCell>Length (inches)</this.CustomTableCell>
-
-                <this.CustomTableCell>Strength</this.CustomTableCell>
-
-                <this.CustomTableCell>Wrapper</this.CustomTableCell>
-              </TableRow>
-            </TableHead> */}
-            {this.printAllCigars()}
-          {/* </Table> */}
-        {/* </Grid> */}
+        {this.printAllCigars()}
       </Grid>
     );
   }

@@ -11,6 +11,7 @@ import {
   TableCell,
   TableBody
 } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { withStyles } from "@material-ui/core/styles";
 import ApiUrl from "../../helpers/environment";
 
@@ -136,31 +137,20 @@ export default class CigarShow extends Component {
               <TableCell>{this.state.wrapperColor}</TableCell>
 
               <TableCell>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.toggleUpdateModal}
-                >
-                  Edit
-                </Button>
+                <i class="material-icons hover primary" onClick={this.toggleUpdateModal}>edit</i>
               </TableCell>
 
               <TableCell>
-                <Button
+                <DeleteIcon
                   variant="contained"
                   color="primary"
                   onClick={this.deleteCigar}
-                >
-                  Delete
-                </Button>
+                  className="hover"
+                />
               </TableCell>
             </TableBody>
           </Table>
         </Grid>
-
-        <Grid item xs={6} />
-
-        <Grid item xs={6} />
 
         <Grid item xs={8}>
           {this.showUpdateModal()}

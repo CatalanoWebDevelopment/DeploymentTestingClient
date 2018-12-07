@@ -16,6 +16,10 @@ a {
     color:#808080 !important;
 }
 
+.primary {
+    color: #827717 !important;
+}
+
 .image {
     margin-top: 8px;
     border-radius: 20px;
@@ -49,4 +53,6 @@ a {
     height: 100%;
 }
 
-/* MEDIA QUERIES */
+.hover {
+    cursor: pointer;
+}

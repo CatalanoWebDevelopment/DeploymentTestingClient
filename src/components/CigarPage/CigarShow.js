@@ -118,6 +118,10 @@ export default class CigarShow extends Component {
                 <this.CustomTableCell>Strength</this.CustomTableCell>
 
                 <this.CustomTableCell>Wrapper</this.CustomTableCell>
+
+                <this.CustomTableCell>Edit?</this.CustomTableCell>
+
+                <this.CustomTableCell>Delete?</this.CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
